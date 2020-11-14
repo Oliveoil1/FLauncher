@@ -1,0 +1,45 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>FLauncher</RootNamespace>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>Resources\FLauncher.ico</ApplicationIcon>
+    <AssemblyName>FLauncher</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\FLauncher.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CsvHelper" Version="15.0.10" />
+    <PackageReference Include="GlobalHotKey" Version="1.1.0" />
+    <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.0.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="HotKeyManagement.WPF.4">
+      <HintPath>..\..\..\..\Downloads\HotKeyManagement.WPF.4.dll</HintPath>
+    </Reference>
+    <Reference Include="ManagedWinapi">
+      <HintPath>..\..\..\..\Downloads\managedwinapi-0.3\ManagedWinapi.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\FLauncher.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Aliases.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
