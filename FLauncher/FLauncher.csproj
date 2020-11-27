@@ -38,7 +38,7 @@
 
   <ItemGroup>
     <None Update="Aliases.csv">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 

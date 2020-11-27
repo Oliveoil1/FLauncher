@@ -38,22 +38,27 @@ namespace FLauncher
         Runbox r = new Runbox();
 		public void Execute(object parameter)
 		{
-			if (parameter.ToString() == "ShowWindow")
-			{
-                try
-                {
-					var hotkey = hkManager.Register(Key.Space, ModifierKeys.Alt);
-					hkManager.KeyPressed += HkManager_KeyPressed;
-				}
-                catch { }
-
-				Show();
-			}
-			if(parameter.ToString() == "Quit")
+			switch(parameter.ToString())
             {
-				hkManager.Dispose();
-				Application.Current.Shutdown();
-            }
+				case "ShowWindow":
+					try
+					{
+						var hotkey = hkManager.Register(Key.Space, ModifierKeys.Alt);
+						hkManager.KeyPressed += HkManager_KeyPressed;
+					}
+					catch 
+					{
+						MessageBox.Show("Error");
+					}
+
+					Show();
+					break;
+				case "Quit":
+					hkManager.Dispose();
+					Application.Current.Shutdown();
+					break;
+
+			}
 		}
 		  
 		public bool CanExecute(object parameter)

@@ -25,13 +25,15 @@ namespace FLauncher
 	/// </summary>
 	public partial class MainWindow : Window
 	{
-		public MainWindow()
+        public MainWindow()
 		{
 			InitializeComponent();
 		}
 
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
+			var s = new ShowMessageCommand();
+			s.Execute("ShowWindow");
 			Hide();
 		}
 
@@ -43,6 +45,12 @@ namespace FLauncher
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
 			Process.Start("explorer.exe", Directory.GetCurrentDirectory());
+		}
+
+		private void ReloadPrefs(object sender, RoutedEventArgs e)
+		{
+			Process.Start(Process.GetCurrentProcess().MainModule.FileName);
+			Application.Current.Shutdown();
 		}
     }
 }
