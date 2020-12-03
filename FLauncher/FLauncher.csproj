@@ -36,10 +36,4 @@
     <Resource Include="Resources\FLauncher.ico" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="Aliases.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
 </Project>

@@ -44,7 +44,7 @@ namespace FLauncher
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-			Process.Start("explorer.exe", Directory.GetCurrentDirectory());
+			Process.Start("explorer.exe", Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\FLauncher");
 		}
 
 		private void ReloadPrefs(object sender, RoutedEventArgs e)

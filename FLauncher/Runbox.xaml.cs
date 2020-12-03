@@ -117,13 +117,24 @@ namespace FLauncher
         {
 			try
             {
-				var reader = new StreamReader(Directory.GetCurrentDirectory() + "/Aliases.csv");
+				if (!File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/FLauncher" + "/Aliases.csv"))
+				{
+					Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/FLauncher");
+					using (StreamWriter sw = File.CreateText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/FLauncher" + "/Aliases.csv"))
+					{
+						sw.WriteLine("alias,full_path");
+						sw.WriteLine("g,https://www.google.com/search?q=");
+					}
+					Reload();
+				}
+				var reader = new StreamReader(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/FLauncher" + "/Aliases.csv");
 				var csv = new CsvReader(reader, CultureInfo.InvariantCulture);
 				var records = csv.GetRecords<Alias>();
 
 				aliases = records.ToList();
 
-				String[] dirs = Directory.GetFiles("C:/ProgramData/Microsoft/Windows/Start Menu/", "*", SearchOption.AllDirectories);
+				List<String> dirs = Directory.GetFiles(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "*", SearchOption.AllDirectories).ToList();
+				dirs.AddRange(Directory.GetFiles(Environment.GetFolderPath(Environment.SpecialFolder.StartMenu), "*", SearchOption.AllDirectories));
 
 				foreach (String dir in dirs)
 				{
