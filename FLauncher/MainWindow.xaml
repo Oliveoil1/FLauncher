@@ -22,6 +22,8 @@
                 <ContextMenu>
                     <MenuItem Header="Open Data Location" Click="MenuItem_Click"/>
                     <MenuItem Header="Reload Application" Click="ReloadPrefs"/>
+                    <MenuItem Header="Check for updates" Click="CheckForUpdatesClick"/>
+                    <MenuItem Header="About" Click="ShowAbout"/>
                     <MenuItem Header="Quit" Click="Quit_Click"/>
                 </ContextMenu>
             </tb:TaskbarIcon.ContextMenu>

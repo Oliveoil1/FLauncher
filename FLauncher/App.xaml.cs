@@ -47,9 +47,7 @@ namespace FLauncher
 						hkManager.KeyPressed += HkManager_KeyPressed;
 					}
 					catch 
-					{
-						MessageBox.Show("Error");
-					}
+					{ }
 
 					Show();
 					break;
