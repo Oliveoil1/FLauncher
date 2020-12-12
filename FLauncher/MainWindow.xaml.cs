@@ -20,6 +20,7 @@ using System.Globalization;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Drawing;
 using Octokit;
 using Application = System.Windows.Application;
 using ProductHeaderValue = Octokit.ProductHeaderValue;
@@ -93,5 +94,22 @@ namespace FLauncher
         {
 			UpdateCheck();
         }
-    }
+
+        private void EditAliasClick(object sender, RoutedEventArgs e)
+        {
+			new AliasEditor().Show();
+        }
+
+        private void OptionsClick(object sender, RoutedEventArgs e)
+        {
+			new Options().Show();
+        }
+
+        private void TaskbarIcon1_Initialized(object sender, EventArgs e)
+        {
+#if DEBUG
+			TaskbarIcon1.SetValue(IconProperty, new BitmapImage(new Uri("pack://application:,,,/FLauncher;component/Resources/FLauncherDebug.ico")));
+#endif
+		}
+	}
 }

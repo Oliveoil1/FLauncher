@@ -18,33 +18,49 @@ using System.IO;
 using System.Globalization;
 using CsvHelper;
 using Path = System.IO.Path;
+using PluginBase;
+using System.Reflection;
+using System.Runtime.Loader;
 
 namespace FLauncher
 {
-    /// <summary>
-    /// Interaction logic for Runbox.xaml
-    /// </summary>
-    public partial class Runbox : Window
-    {
+	/// <summary>
+	/// Interaction logic for Runbox.xaml
+	/// </summary>
+	public partial class Runbox : Window
+	{
 		public static List<Alias> aliases;
+		public static List<IPlugin> plugins = new List<IPlugin>();
 
-        public Runbox()
-        {
-            InitializeComponent();
-        }
+		public Runbox()
+		{
+			InitializeComponent();
+		}
 
 		String textEntered = "";
 
 		private void Input_KeyDown(object sender, KeyEventArgs e)
-        {
+		{
 			if (e.Key == Key.Enter)
 			{
 				textEntered = Input.Text;
 
+				bool inputHandled = false;
+
+				foreach(IPlugin plugin in plugins)
+                {
+					inputHandled = plugin.CommandEntered(textEntered);
+                }
+
+				if(inputHandled == true)
+                {
+					return;
+                }
+
 				Process process = new Process();
 				ProcessStartInfo processStartInfo = new ProcessStartInfo();
 
-                foreach (Alias _alias in aliases)
+				foreach (Alias _alias in aliases)
 				{
 					//MessageBox.Show(_alias.alias + " " +_alias.full_path);
 					if (textEntered == _alias.alias)
@@ -83,30 +99,57 @@ namespace FLauncher
 
 		}
 
-        private void Window_Deactivated(object sender, EventArgs e)
-        {
-			Visibility = Visibility.Hidden;
-        }
+		private void Load_Plugin(string path)
+		{
+			Assembly DLL = Assembly.LoadFile(path);
 
-        private void Window_Activated(object sender, EventArgs e)
-        {
+			var objType = DLL.GetType("TestPlugin");
+
+			foreach (var type in DLL.GetTypes())
+			{
+				if (type != null)
+				{
+
+					if (typeof(IPlugin).IsAssignableFrom(type))
+					{
+						IPlugin plugin = (IPlugin)Activator.CreateInstance(type);
+
+						//var pluginInfo = new PluginInfo(DLL, type);
+						plugins.Add(plugin);
+					}
+				}
+				else
+				{
+					MessageBox.Show("pain");
+				}
+			}
+
+		}
+
+		private void Window_Deactivated(object sender, EventArgs e)
+		{
+			Visibility = Visibility.Hidden;
+		}
+
+		private void Window_Activated(object sender, EventArgs e)
+		{
 			Input.Text = "";
 			Input.Focus();
 		}
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
+		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+		{
 			e.Cancel = true;
 			Hide();
-        }
+		}
 
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
 			Reload();
 		}
 
-        private void Window_KeyDown(object sender, KeyEventArgs e)
-        {
+		private void Window_KeyDown(object sender, KeyEventArgs e)
+		{
 			if (e.Key == Key.System && e.OriginalSource is TextBox)
 			{
 				e.Handled = true;
@@ -114,9 +157,9 @@ namespace FLauncher
 		}
 
 		private void Reload()
-        {
+		{
 			try
-            {
+			{
 				if (!File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/FLauncher" + "/Aliases.csv"))
 				{
 					Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/FLauncher");
@@ -132,6 +175,8 @@ namespace FLauncher
 				var records = csv.GetRecords<Alias>();
 
 				aliases = records.ToList();
+
+
 
 				List<String> dirs = Directory.GetFiles(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "*", SearchOption.AllDirectories).ToList();
 				dirs.AddRange(Directory.GetFiles(Environment.GetFolderPath(Environment.SpecialFolder.StartMenu), "*", SearchOption.AllDirectories));
@@ -152,10 +197,26 @@ namespace FLauncher
 					Input.Items.Add(_alias.alias);
 				}
 			}
-			catch(Exception ex)
-            {
+			catch (Exception ex)
+			{
 				MessageBox.Show(ex.Message);
-            }
+			}
+
+
+			//Load Plugins
+
+			String[] pluginPaths = Directory.GetFiles(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/FLauncher/Plugins");
+
+			foreach (String path in pluginPaths)
+			{
+				Load_Plugin(path);
+			}
+
+			foreach (IPlugin plugin in plugins)
+			{
+				Options.pluginNames.Add(plugin.name);
+
+			}
 		}
 	}
 }

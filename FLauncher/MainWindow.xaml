@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:FLauncher"
         xmlns:tb="http://www.hardcodet.net/taskbar"
         mc:Ignorable="d"
-        Title="MainWindow" Height="70" Width="663" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" Topmost="True" Loaded="Window_Loaded" ShowInTaskbar="False">
+        Title="MainWindow" Height="255" Width="589" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" Topmost="True" Loaded="Window_Loaded" ShowInTaskbar="False" Background="White" Foreground="{x:Null}" Visibility="Visible">
     <Grid>
         <Grid.Resources>
             <local:ShowMessageCommand
@@ -15,14 +15,16 @@
         </Grid.Resources>
         <tb:TaskbarIcon
             IconSource="Resources/FLauncher.ico"
-            ToolTipText="FLauncher" DoubleClickCommand="{StaticResource MessageCommand}" 
-            DoubleClickCommandParameter="ShowWindow">
-            
+            ToolTipText="Show FLauncher (Alt+Space)" DoubleClickCommand="{StaticResource MessageCommand}" 
+            DoubleClickCommandParameter="ShowWindow" LeftClickCommand="{DynamicResource MessageCommand}" LeftClickCommandParameter="ShowWindow" NoLeftClickDelay="True" x:Name="TaskbarIcon1" Initialized="TaskbarIcon1_Initialized">
+
             <tb:TaskbarIcon.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="Open Data Location" Click="MenuItem_Click"/>
-                    <MenuItem Header="Reload Application" Click="ReloadPrefs"/>
-                    <MenuItem Header="Check for updates" Click="CheckForUpdatesClick"/>
+                    <!--<MenuItem Header="Open Data Location" Click="MenuItem_Click"/>-->
+                    <!--<MenuItem Header="Reload Application" Click="ReloadPrefs"/>-->
+                    <MenuItem Header="Custom Alias Editor" Click="EditAliasClick"/>
+                    <MenuItem Header="Options" Click="OptionsClick"/>
+                    <MenuItem Header="Check For Updates" Click="CheckForUpdatesClick"/>
                     <MenuItem Header="About" Click="ShowAbout"/>
                     <MenuItem Header="Quit" Click="Quit_Click"/>
                 </ContextMenu>

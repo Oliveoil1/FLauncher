@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FLauncher" xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.AeroLite"
         mc:Ignorable="d"
-        Title="Runbox" Height="70" Width="650" Deactivated="Window_Deactivated" Activated="Window_Activated" WindowStyle="None" ResizeMode="NoResize" Closing="Window_Closing" WindowStartupLocation="CenterScreen" Foreground="Black" Loaded="Window_Loaded" Background="{x:Null}" KeyDown="Window_KeyDown">
+        Title="Runbox" Height="70" Width="650" Deactivated="Window_Deactivated" Activated="Window_Activated" WindowStyle="None" ResizeMode="NoResize" Closing="Window_Closing" WindowStartupLocation="CenterScreen" Foreground="Black" Loaded="Window_Loaded" Background="{x:Null}" KeyDown="Window_KeyDown" ShowInTaskbar="False">
 
     <Window.Resources>
         <Style x:Key="FocusVisual">
