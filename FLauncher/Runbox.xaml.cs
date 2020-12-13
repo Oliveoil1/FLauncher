@@ -79,6 +79,11 @@ namespace FLauncher
 				processStartInfo.FileName = textEntered;
 				processStartInfo.UseShellExecute = true;
 
+				if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
+                {
+					processStartInfo.Verb = "runas";
+                }
+
 				//processStartInfo.Arguments = "/c " + textEntered;
 				process.StartInfo = processStartInfo;
 				Visibility = Visibility.Hidden;
@@ -117,10 +122,6 @@ namespace FLauncher
 						//var pluginInfo = new PluginInfo(DLL, type);
 						plugins.Add(plugin);
 					}
-				}
-				else
-				{
-					MessageBox.Show("pain");
 				}
 			}
 
@@ -194,7 +195,9 @@ namespace FLauncher
 
 				foreach (Alias _alias in aliases)
 				{
-					Input.Items.Add(_alias.alias);
+					ComboBoxItem comboBoxItem = new ComboBoxItem();
+					comboBoxItem.Content = _alias.alias;
+					Input.Items.Add(comboBoxItem);
 				}
 			}
 			catch (Exception ex)
@@ -217,6 +220,8 @@ namespace FLauncher
 				Options.pluginNames.Add(plugin.name);
 
 			}
+
+			//Load Style
 		}
 	}
 }

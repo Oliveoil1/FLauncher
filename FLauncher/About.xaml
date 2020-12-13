@@ -7,10 +7,10 @@
         mc:Ignorable="d"
         Title="About" Height="300" Width="500" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
-        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="12">
-            <Image Source="/FLauncher.ico" Height="25" Width="30"/><Bold FontSize="30">FLauncher</Bold>
+        <TextBlock HorizontalAlignment="Center" Margin="0,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Width="480">
+            <Image Source="Resources/FLauncher.ico" Height="25" Width="30"/><Bold FontSize="30">FLauncher</Bold>
             <LineBreak/>
-            FLauncher is a lightweight Windows Run replacement with a clean UI and support for custom aliases.
+            FLauncher is a lightweight Windows Run replacement with a clean UI with new features such as custom aliases, plugins, and themes.
             <LineBreak/>
             <Hyperlink NavigateUri="https://github.com/OliveOil1/FLauncher" Click="Hyperlink_Click">Github Link</Hyperlink>
         </TextBlock>
