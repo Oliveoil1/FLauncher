@@ -161,16 +161,6 @@ namespace FLauncher
 		{
 			try
 			{
-				if (!File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/FLauncher" + "/Aliases.csv"))
-				{
-					Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/FLauncher");
-					using (StreamWriter sw = File.CreateText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/FLauncher" + "/Aliases.csv"))
-					{
-						sw.WriteLine("alias,full_path");
-						sw.WriteLine("g,https://www.google.com/search?q=");
-					}
-					Reload();
-				}
 				var reader = new StreamReader(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/FLauncher" + "/Aliases.csv");
 				var csv = new CsvReader(reader, CultureInfo.InvariantCulture);
 				var records = csv.GetRecords<Alias>();

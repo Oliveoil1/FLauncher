@@ -33,6 +33,7 @@ namespace FLauncher
 	public partial class MainWindow : Window
 	{
 		ShowMessageCommand s = new ShowMessageCommand();
+		string[] appdataDirs = { Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/FLauncher", Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/FLauncher/Plugins" };
 
 		public MainWindow()
 		{
@@ -41,6 +42,7 @@ namespace FLauncher
 
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
+			CreateAppData();
 			s.Execute("ShowWindow");
 			Hide();
 			//UpdateCheck();
@@ -67,6 +69,26 @@ namespace FLauncher
             {
 				MessageBox.Show("No updates available");
             }
+		}
+
+		private void CreateAppData()
+        {
+			foreach(string dir in appdataDirs)
+            {
+				if (!Directory.Exists(dir))
+				{
+					Directory.CreateDirectory(dir);
+				}
+			}
+
+			if(!File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/FLauncher/Aliases.csv"))
+            {
+				using (StreamWriter sw = File.CreateText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/FLauncher" + "/Aliases.csv"))
+				{
+					sw.WriteLine("alias,full_path");
+					sw.WriteLine("g,https://www.google.com/search?q=");
+				}
+			}
 		}
 
         private void Quit_Click(object sender, RoutedEventArgs e)
