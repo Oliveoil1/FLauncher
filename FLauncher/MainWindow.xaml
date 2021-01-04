@@ -16,13 +16,12 @@
         <tb:TaskbarIcon
             IconSource="Resources/FLauncher.ico"
             ToolTipText="Show FLauncher (Alt+Space)" DoubleClickCommand="{StaticResource MessageCommand}" 
-            DoubleClickCommandParameter="ShowWindow" LeftClickCommand="{DynamicResource MessageCommand}" LeftClickCommandParameter="ShowWindow" NoLeftClickDelay="True" x:Name="TaskbarIcon1" Initialized="TaskbarIcon1_Initialized">
+            DoubleClickCommandParameter="ShowWindow" LeftClickCommand="{DynamicResource MessageCommand}" LeftClickCommandParameter="ShowWindow" NoLeftClickDelay="True" x:Name="NotifyIcon1" Initialized="TaskbarIcon1_Initialized">
 
             <tb:TaskbarIcon.ContextMenu>
                 <ContextMenu>
                     <!--<MenuItem Header="Open Data Location" Click="MenuItem_Click"/>-->
                     <!--<MenuItem Header="Reload Application" Click="ReloadPrefs"/>-->
-                    <MenuItem Header="Custom Alias Editor" Click="EditAliasClick"/>
                     <MenuItem Header="Options" Click="OptionsClick"/>
                     <MenuItem Header="Check For Updates" Click="CheckForUpdatesClick"/>
                     <MenuItem Header="About" Click="ShowAbout"/>

@@ -5,17 +5,34 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FLauncher"
         mc:Ignorable="d"
-        Title="Options" Height="450" Width="800" Loaded="Window_Loaded">
+        Title="Options" Height="450" Width="800" Loaded="Window_Loaded" Closing="Window_Closing">
     <Grid>
         <TabControl>
+            <TabItem Header="General">
+                <Grid Background="#FFE5E5E5">
+                    <StackPanel>
+                        <CheckBox x:Name="Autoupdate" Content="Automatically check for updates?" Click="Autoupdate_Click"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Aliases">
+                <Grid Background="#FFE5E5E5">
+                    <DockPanel>
+                        <ToolBar DockPanel.Dock="Top" HorizontalAlignment="Left">
+                            <Button x:Name="Save" Content="Save" Click="Save_Click"/>
+                            <Button x:Name="Reload_App" Content="Reload Application" Click="Reload_App_Click"/>
+                            <Button x:Name="Open_Data" Content="Open Data Folder" Click="Open_Data_Click"/>
+                        </ToolBar>
+
+                        <DataGrid x:Name="AliasGrid"/>
+                    </DockPanel>
+                </Grid>
+            </TabItem>
             <TabItem Header="Plugins">
                 <Grid Background="#FFE5E5E5">
                     <ListBox x:Name="PluginList"/>
 
                 </Grid>
-            </TabItem>
-            <TabItem Header="TabItem">
-                <Grid Background="#FFE5E5E5"/>
             </TabItem>
         </TabControl>
 

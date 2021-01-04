@@ -22,6 +22,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Drawing;
 using Octokit;
+using System.Timers;
 using Application = System.Windows.Application;
 using ProductHeaderValue = Octokit.ProductHeaderValue;
 
@@ -34,40 +35,57 @@ namespace FLauncher
 	{
 		ShowMessageCommand s = new ShowMessageCommand();
 		string[] appdataDirs = { Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/FLauncher", Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/FLauncher/Plugins" };
+		Timer checkForTime = new Timer(1800000);
+		Credentials creds;
 
 		public MainWindow()
 		{
 			InitializeComponent();
+			checkForTime.Elapsed += new ElapsedEventHandler(checkForTime_Elapsed);
+			checkForTime.Enabled = true;
 		}
 
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
 			CreateAppData();
+			try { creds = new Credentials(File.ReadAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/FLauncher" + "/GithubKey.txt")); } catch { }
 			s.Execute("ShowWindow");
 			Hide();
-			//UpdateCheck();
+			if(Settings1.Default.AutoUpdate)
+				UpdateCheck(true);
 		}
 
-		private async void UpdateCheck()
+		private async void UpdateCheck(bool auto)
         {
-            s.Execute("ShowWindow");
+			//s.Execute("ShowWindow");
 			var github = new GitHubClient(new ProductHeaderValue("FLauncher"));
+			github.Credentials = creds;
 
-			var release = await github.Repository.Release.GetLatest("OliveOil1", "Flauncher");
+			Release release = new Release();
+
+			try
+            {
+				release = await github.Repository.Release.GetLatest("OliveOil1", "Flauncher");
+			}
+			catch(Exception ex)
+            {
+				if(!auto)
+					MessageBox.Show(ex.Message);
+				return;
+            }
+			
 
 			if (release.TagName != File.ReadAllText(Directory.GetCurrentDirectory() + @"\version.txt"))
             {
-				MessageBoxResult result = MessageBox.Show("Update found, would you like to update?", "Update Found", MessageBoxButton.OKCancel);
-                if (result == MessageBoxResult.OK)
-                {
-                    new WebClient().DownloadFile("https://github.com/OliveOil1/FLauncher/releases/latest/download/setup.exe", "update.exe");
-
-					Process.Start(Directory.GetCurrentDirectory() + @"\update.exe", "/CLOSEAPPLICATIONS /SILENT /DIR=" + Directory.GetCurrentDirectory());
-                }
+				if (auto)
+					NotifyIcon1.ShowCustomBalloon(new UpdateBalloon(true, release.TagName), System.Windows.Controls.Primitives.PopupAnimation.Fade, 10000);
+				else
+					NotifyIcon1.ShowCustomBalloon(new UpdateBalloon(true, release.TagName), System.Windows.Controls.Primitives.PopupAnimation.Fade, 10000);
 			}
 			else
             {
-				MessageBox.Show("No updates available");
+				if(!auto)
+					NotifyIcon1.ShowCustomBalloon(new UpdateBalloon(false), System.Windows.Controls.Primitives.PopupAnimation.Fade, 10000);
             }
 		}
 
@@ -87,6 +105,13 @@ namespace FLauncher
 				{
 					sw.WriteLine("alias,full_path");
 					sw.WriteLine("g,https://www.google.com/search?q=");
+				}
+			}
+			if (!File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/FLauncher/GithubKey.txt"))
+			{
+				using (StreamWriter sw = File.CreateText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/FLauncher" + "/GithubKey.txt"))
+				{
+					sw.WriteLine("[API KEY HERE]");
 				}
 			}
 		}
@@ -114,12 +139,7 @@ namespace FLauncher
 
 		private void CheckForUpdatesClick(object sender, RoutedEventArgs e)
         {
-			UpdateCheck();
-        }
-
-        private void EditAliasClick(object sender, RoutedEventArgs e)
-        {
-			new AliasEditor().Show();
+			UpdateCheck(false);
         }
 
         private void OptionsClick(object sender, RoutedEventArgs e)
@@ -127,11 +147,18 @@ namespace FLauncher
 			new Options().Show();
         }
 
-        private void TaskbarIcon1_Initialized(object sender, EventArgs e)
+		private void checkForTime_Elapsed(object sender, ElapsedEventArgs e)
+        {
+			if(Settings1.Default.AutoUpdate)
+				this.Dispatcher.Invoke(() => UpdateCheck(true));
+        }
+
+
+		private void TaskbarIcon1_Initialized(object sender, EventArgs e)
         {
 #if DEBUG
-			TaskbarIcon1.SetValue(IconProperty, new BitmapImage(new Uri("pack://application:,,,/FLauncher;component/Resources/FLauncherDebug.ico")));
+			//TaskbarIcon1.SetValue(IconProperty, new BitmapImage(new Uri("pack://application:,,,/FLauncher;component/Resources/FLauncherDebug.ico")));
 #endif
 		}
-	}
+    }
 }
