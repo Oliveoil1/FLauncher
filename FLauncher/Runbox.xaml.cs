@@ -185,9 +185,21 @@ namespace FLauncher
 
 				foreach (Alias _alias in aliases)
 				{
-					ComboBoxItem comboBoxItem = new ComboBoxItem();
-					comboBoxItem.Content = _alias.alias;
-					Input.Items.Add(comboBoxItem);
+					if (_alias.alias != "")
+					{
+						ComboBoxItem comboBoxItem = new ComboBoxItem();
+						if (_alias.alias.Length > 21)
+						{
+							comboBoxItem.Content = _alias.alias.Substring(0, 18) + "...";
+						}
+						else
+						{
+							comboBoxItem.Content = _alias.alias;
+
+						}
+						comboBoxItem.ToolTip = _alias.alias;
+						Input.Items.Add(comboBoxItem);
+					}
 				}
 			}
 			catch (Exception ex)

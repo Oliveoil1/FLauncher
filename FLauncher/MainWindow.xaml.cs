@@ -25,6 +25,7 @@ using Octokit;
 using System.Timers;
 using Application = System.Windows.Application;
 using ProductHeaderValue = Octokit.ProductHeaderValue;
+using AdonisUI;
 
 namespace FLauncher
 {
@@ -43,6 +44,8 @@ namespace FLauncher
 			InitializeComponent();
 			checkForTime.Elapsed += new ElapsedEventHandler(checkForTime_Elapsed);
 			checkForTime.Enabled = true;
+
+			ResourceLocator.SetColorScheme(Application.Current.Resources, Settings1.Default.IsDark ? ResourceLocator.LightColorScheme : ResourceLocator.DarkColorScheme);
 		}
 
 		private void Window_Loaded(object sender, RoutedEventArgs e)

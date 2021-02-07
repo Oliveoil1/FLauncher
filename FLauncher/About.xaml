@@ -1,20 +1,22 @@
-﻿<Window x:Class="FLauncher.About"
+﻿<adonisControls:AdonisWindow x:Class="FLauncher.About"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FLauncher"
+        xmlns:adonisUi="clr-namespace:AdonisUI;assembly=AdonisUI"
+        xmlns:adonisControls="clr-namespace:AdonisUI.Controls;assembly=AdonisUI"
         mc:Ignorable="d"
         Title="About" Height="300" Width="500" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
         <TextBlock HorizontalAlignment="Center" Margin="0,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Width="480">
             <Image Source="Resources/FLauncher.ico" Height="25" Width="30"/><Bold FontSize="30">FLauncher</Bold>
             <LineBreak/>
-            FLauncher is a lightweight Windows Run replacement with a clean UI with new features such as custom aliases, plugins, and themes.
+            FLauncher is a lightweight Windows Run replacement with a clean UI with new features such as custom aliases and plugins.
             <LineBreak/>
             <Hyperlink NavigateUri="https://github.com/OliveOil1/FLauncher" Click="Hyperlink_Click">Github Link</Hyperlink>
         </TextBlock>
 
 
     </Grid>
-</Window>
+</adonisControls:AdonisWindow>

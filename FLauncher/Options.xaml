@@ -1,40 +1,54 @@
-﻿<Window x:Class="FLauncher.Options"
+﻿<adonisControls:AdonisWindow x:Class="FLauncher.Options"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FLauncher"
+        xmlns:adonisUi="clr-namespace:AdonisUI;assembly=AdonisUI"
+        xmlns:adonisControls="clr-namespace:AdonisUI.Controls;assembly=AdonisUI"
         mc:Ignorable="d"
         Title="Options" Height="450" Width="800" Loaded="Window_Loaded" Closing="Window_Closing">
     <Grid>
-        <TabControl>
-            <TabItem Header="General">
-                <Grid Background="#FFE5E5E5">
-                    <StackPanel>
-                        <CheckBox x:Name="Autoupdate" Content="Automatically check for updates?" Click="Autoupdate_Click"/>
-                    </StackPanel>
-                </Grid>
-            </TabItem>
-            <TabItem Header="Aliases">
-                <Grid Background="#FFE5E5E5">
-                    <DockPanel>
-                        <ToolBar DockPanel.Dock="Top" HorizontalAlignment="Left">
-                            <Button x:Name="Save" Content="Save" Click="Save_Click"/>
+        <DockPanel>
+            <StatusBar DockPanel.Dock="Bottom" HorizontalAlignment="Stretch">
+                <StatusBarItem HorizontalAlignment="Right">
+                    <StackPanel Orientation="Horizontal">
+                        <StatusBarItem>
                             <Button x:Name="Reload_App" Content="Reload Application" Click="Reload_App_Click"/>
-                            <Button x:Name="Open_Data" Content="Open Data Folder" Click="Open_Data_Click"/>
-                        </ToolBar>
+                        </StatusBarItem>
+                        <StatusBarItem>
+                            <Button x:Name="Save" Content="Save" Click="Save_Click"/>
+                        </StatusBarItem>
+                    </StackPanel>
+                </StatusBarItem>
+            </StatusBar>
+            <TabControl>
+                <TabItem Header="General">
+                    <Grid>
+                        <StackPanel>
+                            <CheckBox x:Name="Autoupdate" Content="Automatically check for updates?" Click="Autoupdate_Click"/>
+                            <CheckBox x:Name="IsDark" Content="Dark mode?" Click="IsDark_Click"/>
+                        </StackPanel>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Aliases">
+                    <Grid>
+                        <DockPanel>
+                            <ToolBar DockPanel.Dock="Top" HorizontalAlignment="Left" ToolBarTray.IsLocked="True">
+                                <Button x:Name="Open_Data" Content="Open Data Folder" Click="Open_Data_Click"/>
+                            </ToolBar>
 
-                        <DataGrid x:Name="AliasGrid"/>
-                    </DockPanel>
-                </Grid>
-            </TabItem>
-            <TabItem Header="Plugins">
-                <Grid Background="#FFE5E5E5">
-                    <ListBox x:Name="PluginList"/>
+                            <DataGrid x:Name="AliasGrid"/>
+                        </DockPanel>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Plugins">
+                    <Grid>
+                        <ListBox x:Name="PluginList"/>
 
-                </Grid>
-            </TabItem>
-        </TabControl>
-
+                    </Grid>
+                </TabItem>
+            </TabControl>
+        </DockPanel>
     </Grid>
-</Window>
+</adonisControls:AdonisWindow>

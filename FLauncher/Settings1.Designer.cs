@@ -34,5 +34,29 @@ namespace FLauncher {
                 this["AutoUpdate"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IsDark {
+            get {
+                return ((bool)(this["IsDark"]));
+            }
+            set {
+                this["IsDark"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool PromptApplyChanges {
+            get {
+                return ((bool)(this["PromptApplyChanges"]));
+            }
+            set {
+                this["PromptApplyChanges"] = value;
+            }
+        }
     }
 }

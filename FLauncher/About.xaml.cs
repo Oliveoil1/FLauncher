@@ -15,7 +15,7 @@ namespace FLauncher
     /// <summary>
     /// Interaction logic for About.xaml
     /// </summary>
-    public partial class About : Window
+    public partial class About : AdonisUI.Controls.AdonisWindow
     {
         public About()
         {
