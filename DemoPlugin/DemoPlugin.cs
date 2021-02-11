@@ -13,7 +13,7 @@ namespace DemoPlugin
 
         public string description => "A demo of FLauncher's plugin system.";
 
-        public bool CommandEntered(string text_entered)
+        public bool CommandEntered(string text_entered, string parameter)
         {
             bool inputHandled = false;
             if (text_entered.ToLower() == "demo plugin")

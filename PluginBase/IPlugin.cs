@@ -7,7 +7,7 @@ namespace PluginBase
         string name { get; }
         string description { get; }
 
-        bool CommandEntered(string text_entered);
+        bool CommandEntered(string text_entered, string parameter);
         int Init();
     }
 }

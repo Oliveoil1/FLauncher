@@ -11,7 +11,6 @@
 
   <ItemGroup>
     <None Remove="Resources\FLauncher.ico" />
-    <None Remove="Resources\FLauncherDebug.ico" />
     <None Remove="Resources\FLauncherDebug.png" />
   </ItemGroup>
 
@@ -46,7 +45,6 @@
     <Resource Include="Resources\FLauncher.ico">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Resources\FLauncherDebug.ico" />
   </ItemGroup>
 
   <ItemGroup>

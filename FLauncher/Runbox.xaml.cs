@@ -41,6 +41,21 @@ namespace FLauncher
 
 		private void Input_KeyDown(object sender, KeyEventArgs e)
 		{
+			if(e.Key == Key.Tab)	
+            {
+				if(ParamsBox.Visibility == Visibility.Hidden)
+                {
+					Height = 119;
+					ParamsBox.Visibility = Visibility.Visible;
+					ParamsBox.Text = "";
+				}
+                else
+                {
+					Height = 70;
+					ParamsBox.Visibility = Visibility.Hidden;
+				}
+
+			}
 			if (e.Key == Key.Enter)
 			{
 				textEntered = Input.Text;
@@ -49,7 +64,14 @@ namespace FLauncher
 
 				foreach(IPlugin plugin in plugins)
                 {
-					inputHandled = plugin.CommandEntered(textEntered);
+                    try
+                    {
+						inputHandled = plugin.CommandEntered(textEntered, ParamsBox.Text);
+					}
+                    catch(Exception ex)
+                    {
+						MessageBox.Show(ex.Message);
+                    }
                 }
 
 				if(inputHandled == true)
@@ -78,6 +100,7 @@ namespace FLauncher
 
 				processStartInfo.FileName = textEntered;
 				processStartInfo.UseShellExecute = true;
+				processStartInfo.Arguments = ParamsBox.Text;
 
 				if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
                 {
@@ -90,6 +113,11 @@ namespace FLauncher
 				try
 				{
 					process.Start();
+
+					Height = 70;
+					ParamsBox.Visibility = Visibility.Hidden;
+
+					ParamsBox.Text = "";
 				}
 				catch (Exception ex)
 				{
@@ -136,6 +164,11 @@ namespace FLauncher
 		{
 			Input.Text = "";
 			Input.Focus();
+
+			Height = 70;
+			ParamsBox.Visibility = Visibility.Hidden;
+
+			ParamsBox.Text = "";
 		}
 
 		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

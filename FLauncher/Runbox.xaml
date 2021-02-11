@@ -8,7 +8,7 @@
         Title="Runbox" Height="70" Width="650" Deactivated="Window_Deactivated" Activated="Window_Activated" WindowStyle="None" ResizeMode="NoResize" Closing="Window_Closing" WindowStartupLocation="CenterScreen" Foreground="Black" Loaded="Window_Loaded" Background="{x:Null}" KeyDown="Window_KeyDown" ShowInTaskbar="False">
 
     <Grid>
-        <ComboBox x:Name="Input" x:FieldModifier="public" Text="cmd" KeyDown="Input_KeyDown" FontFamily="Consolas" FontSize="55" IsEditable="True" FontWeight="Bold" Cursor="AppStarting">
+        <ComboBox x:Name="Input" x:FieldModifier="public" Text="cmd" KeyDown="Input_KeyDown" FontFamily="Consolas" FontSize="55" IsEditable="True" FontWeight="Bold" Cursor="AppStarting" Height="70" Width="650" VerticalAlignment="Top">
             <ComboBox.ItemContainerStyle>
                 <Style TargetType="ComboBoxItem">
                     <Setter Property="MaxWidth" Value="640"/>
@@ -16,5 +16,8 @@
                 </Style>
             </ComboBox.ItemContainerStyle>
         </ComboBox>
+        <TextBox x:Name="ParamsBox" x:FieldModifier="public" Text="--something" KeyDown="Input_KeyDown" FontFamily="Consolas" FontSize="35" FontWeight="Medium"  Cursor="AppStarting" Visibility="Hidden" VerticalAlignment="Bottom">
+
+        </TextBox>
     </Grid>
 </Window>
