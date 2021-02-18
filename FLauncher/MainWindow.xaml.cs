@@ -25,6 +25,7 @@ using Octokit;
 using System.Timers;
 using Application = System.Windows.Application;
 using ProductHeaderValue = Octokit.ProductHeaderValue;
+using MessageBox = AdonisUI.Controls.MessageBox;
 using AdonisUI;
 
 namespace FLauncher
@@ -73,7 +74,7 @@ namespace FLauncher
 			catch(Exception ex)
             {
 				if(!auto)
-					MessageBox.Show(ex.Message);
+					MessageBox.Show(ex.Message, "Error");
 				return;
             }
 			

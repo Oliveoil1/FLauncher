@@ -21,6 +21,10 @@ using Path = System.IO.Path;
 using PluginBase;
 using System.Reflection;
 using System.Runtime.Loader;
+using AdonisUI.Controls;
+using MessageBox = AdonisUI.Controls.MessageBox;
+using MessageBoxButton = AdonisUI.Controls.MessageBoxButton;
+using MessageBoxImage = AdonisUI.Controls.MessageBoxImage;
 
 namespace FLauncher
 {
@@ -70,7 +74,7 @@ namespace FLauncher
 					}
                     catch(Exception ex)
                     {
-						MessageBox.Show(ex.Message);
+						MessageBox.Show(ex.Message, "Error");
                     }
                 }
 
@@ -129,12 +133,20 @@ namespace FLauncher
 				}
 
 			}
-
 		}
 
 		private void Load_Plugin(string path)
 		{
-			Assembly DLL = Assembly.LoadFile(path);
+			Assembly DLL;
+
+			try
+            {
+				DLL = Assembly.LoadFile(path);
+			}
+			catch
+            {
+				return;
+            }
 
 			var objType = DLL.GetType("TestPlugin");
 
@@ -237,7 +249,7 @@ namespace FLauncher
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				MessageBox.Show(ex.Message, "Error");
 			}
 
 

@@ -44,8 +44,13 @@
                 </TabItem>
                 <TabItem Header="Plugins">
                     <Grid>
-                        <ListBox x:Name="PluginList"/>
+                        <DockPanel>
+                            <ToolBar DockPanel.Dock="Top" HorizontalAlignment="Left" ToolBarTray.IsLocked="True">
+                                <Button x:Name="Install_Plugin" Content="Install Plugin" Click="Install_Plugin_Click"/>
+                            </ToolBar>
 
+                            <ListBox x:Name="PluginList"/>
+                        </DockPanel>
                     </Grid>
                 </TabItem>
             </TabControl>

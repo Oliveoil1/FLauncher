@@ -1,0 +1,24 @@
+﻿<adonisControls:AdonisWindow x:Class="FLauncher.PluginInstaller"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FLauncher"
+        xmlns:adonisUi="clr-namespace:AdonisUI;assembly=AdonisUI"
+        xmlns:adonisControls="clr-namespace:AdonisUI.Controls;assembly=AdonisUI"
+        mc:Ignorable="d"
+        Title="PluginInstaller" Height="450" Width="800" Loaded="AdonisWindow_Loaded">
+    <Grid>
+        <DockPanel>
+            <ToolBar DockPanel.Dock="Top">
+                <Button x:Name="Install" Content="Install Selected"/>
+                <Button x:Name="InstallFromFile" Content="Install From File"/>
+                <Button x:Name="CreatePluginMetadata" Content="Create Plugin Metadata" Click="CreatePluginMetadata_Click"/>
+            </ToolBar>
+            <ListBox x:Name="PluginInfoList">
+
+            </ListBox>
+        </DockPanel>
+
+    </Grid>
+</adonisControls:AdonisWindow>

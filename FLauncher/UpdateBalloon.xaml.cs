@@ -59,7 +59,7 @@ namespace FLauncher
                     progress = new Progress("Downloading Update", "Updater");
                     progress.Show();
 
-                    client.DownloadFileAsync(new Uri("https://github.com/OliveOil1/FLauncher/releases/latest/download/setup.exe"), Directory.GetCurrentDirectory() + @"\update.exe");
+                    client.DownloadFileAsync(new Uri("https://github.com/OliveOil1/FLauncher/releases/latest/download/setup.exe"), Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\FLauncher" + @"\update.exe");
                 }
                 catch(Exception ex)
                 {
@@ -73,7 +73,7 @@ namespace FLauncher
             try
             {
                 progress.Hide();
-                Process.Start(Directory.GetCurrentDirectory() + @"\update.exe", "/DIR=" + Directory.GetCurrentDirectory());
+                Process.Start(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\update.exe", "/DIR=" + Directory.GetCurrentDirectory());
             }
             catch(Exception ex)
             {

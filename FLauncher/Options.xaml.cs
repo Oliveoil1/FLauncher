@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using AdonisUI;
 using AdonisUI.Controls;
 using MessageBox = AdonisUI.Controls.MessageBox;
+using PluginBase;
 
 namespace FLauncher
 {
@@ -77,9 +78,12 @@ namespace FLauncher
             }
             AliasGrid.ItemsSource = aliases;
 
-            foreach (string name in pluginNames)
+            foreach (IPlugin plugin in Runbox.plugins)
             {
-                PluginList.Items.Add(name);
+                ListBoxItem listBoxItem = new ListBoxItem();
+                listBoxItem.Content = plugin.name;
+                listBoxItem.ToolTip = plugin.description;
+                PluginList.Items.Add(listBoxItem);
             }
 
             Autoupdate.IsChecked = Settings1.Default.AutoUpdate;
@@ -148,6 +152,11 @@ namespace FLauncher
         private void IsDark_Click(object sender, RoutedEventArgs e)
         {
             Settings1.Default.IsDark = !(bool)IsDark.IsChecked;
+        }
+
+        private void Install_Plugin_Click(object sender, RoutedEventArgs e)
+        {
+            new PluginInstaller().Show();
         }
     }
 }
