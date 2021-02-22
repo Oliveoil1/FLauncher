@@ -84,5 +84,6 @@ namespace FLauncher
 	{
 		public string alias { get; set; }
 		public string full_path { get; set; }
-	}
+        public string parameters { get; set; }
+    }
 }

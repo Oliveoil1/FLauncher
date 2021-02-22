@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Text;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -72,8 +73,13 @@ namespace FLauncher
         {
             try
             {
+                Thread.Sleep(1000);
                 progress.Hide();
-                Process.Start(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\update.exe", "/DIR=" + Directory.GetCurrentDirectory());
+                ProcessStartInfo processStartInfo = new ProcessStartInfo();
+                processStartInfo.FileName = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\FLauncher" + @"\update.exe";
+                processStartInfo.Arguments = "/DIR=" + Directory.GetCurrentDirectory();
+
+                Process.Start(processStartInfo);
             }
             catch(Exception ex)
             {

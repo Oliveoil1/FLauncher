@@ -25,6 +25,7 @@ using AdonisUI.Controls;
 using MessageBox = AdonisUI.Controls.MessageBox;
 using MessageBoxButton = AdonisUI.Controls.MessageBoxButton;
 using MessageBoxImage = AdonisUI.Controls.MessageBoxImage;
+using Microsoft.WindowsAPICodePack.Shell;
 
 namespace FLauncher
 {
@@ -41,7 +42,8 @@ namespace FLauncher
 			InitializeComponent();
 		}
 
-		String textEntered = "";
+		string textEntered = "";
+		string args = "";
 
 		private void Input_KeyDown(object sender, KeyEventArgs e)
 		{
@@ -63,6 +65,8 @@ namespace FLauncher
 			if (e.Key == Key.Enter)
 			{
 				textEntered = Input.Text;
+				args = ParamsBox.Text;
+
 
 				bool inputHandled = false;
 
@@ -92,6 +96,8 @@ namespace FLauncher
 					if (textEntered == _alias.alias)
 					{
 						textEntered = _alias.full_path;
+						if(args == "")
+							args = _alias.parameters;
 						break;
 					}
 					else if (textEntered.StartsWith(_alias.alias + "/"))
@@ -102,9 +108,10 @@ namespace FLauncher
 					}
 				}
 
+				
 				processStartInfo.FileName = textEntered;
 				processStartInfo.UseShellExecute = true;
-				processStartInfo.Arguments = ParamsBox.Text;
+				processStartInfo.Arguments = args;
 
 				if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
                 {
@@ -206,13 +213,27 @@ namespace FLauncher
 		{
 			try
 			{
-				var reader = new StreamReader(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/FLauncher" + "/Aliases.csv");
-				var csv = new CsvReader(reader, CultureInfo.InvariantCulture);
-				var records = csv.GetRecords<Alias>();
+				aliases = new List<Alias>();
+				var FODLERID_AppsFolder = new Guid("{1e87508d-89c2-42f0-8a7e-645a0f50ca58}");
+				ShellObject appsFolder = (ShellObject)KnownFolderHelper.FromKnownFolderId(FODLERID_AppsFolder);
 
-				aliases = records.ToList();
+				foreach (var app in (IKnownFolder)appsFolder)
+				{
+					// The friendly app name
+					string name = app.Name;
+					// The ParsingName property is the AppUserModelID
+					string appUserModelID = app.ParsingName; // or app.Properties.System.AppUserModel.ID
+															 // You can even get the Jumbo icon in one shot
+					//ImageSource icon = app.Thumbnail.ExtraLargeBitmapSource;
+
+					var new_alias = new Alias();
+					new_alias.alias = name;
+					new_alias.full_path = "explorer.exe";
+					new_alias.parameters = @"shell:appsFolder\" + appUserModelID;
 
 
+					aliases.Add(new_alias);
+				}
 
 				List<String> dirs = Directory.GetFiles(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "*", SearchOption.AllDirectories).ToList();
 				dirs.AddRange(Directory.GetFiles(Environment.GetFolderPath(Environment.SpecialFolder.StartMenu), "*", SearchOption.AllDirectories));
@@ -224,18 +245,44 @@ namespace FLauncher
 					new_alias.full_path = dir;
 
 					//MessageBox.Show("|" + new_alias.alias + "|" + " " + new_alias.full_path);
+					bool exists = false;
+					foreach (var _alias in aliases)
+					{
+						if (_alias.alias == new_alias.alias)
+						{
+							exists = true;
+							_alias.alias = new_alias.alias;
+							_alias.full_path = new_alias.full_path;
+							_alias.parameters = "";
 
-					aliases.Add(new_alias);
+							//MessageBox.Show(_alias.alias);
+						}
+					}
+
+					if(exists == false)
+						aliases.Add(new_alias);
 				}
+
+				aliases.Sort((x,y) => string.Compare(y.alias, x.alias));
+
+				var reader = new StreamReader(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/FLauncher" + "/Aliases.csv");
+				var csv = new CsvReader(reader, CultureInfo.InvariantCulture);
+				var records = csv.GetRecords<Alias>();
+				var recordlist = records.ToList();
+
+				aliases.AddRange(recordlist);
+
+				aliases.Reverse();
 
 				foreach (Alias _alias in aliases)
 				{
-					if (_alias.alias != "")
+					if (_alias.alias != "" && !_alias.alias.ToLower().StartsWith("uninstall"))
+	
 					{
 						ComboBoxItem comboBoxItem = new ComboBoxItem();
 						if (_alias.alias.Length > 21)
 						{
-							comboBoxItem.Content = _alias.alias.Substring(0, 18) + "...";
+							comboBoxItem.Content = _alias.alias;//.Substring(0, 18) + "...";
 						}
 						else
 						{

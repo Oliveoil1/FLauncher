@@ -62,8 +62,8 @@ namespace FLauncher
                     Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/FLauncher");
                     using (StreamWriter sw = File.CreateText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/FLauncher" + "/Aliases.csv"))
                     {
-                        sw.WriteLine("alias,full_path");
-                        sw.WriteLine("g,https://www.google.com/search?q=");
+                        sw.WriteLine("alias,full_path,");
+                        sw.WriteLine("g,https://www.google.com/search?q=,");
                     }
                 }
                 var reader = new StreamReader(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/FLauncher" + "/Aliases.csv");
@@ -115,11 +115,11 @@ namespace FLauncher
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            String to_save = "alias,full_path\n";
+            String to_save = "alias,full_path,parameters\n";
 
             foreach (Alias alias in AliasGrid.ItemsSource.Cast<Alias>())
             {
-                to_save += alias.alias + "," + alias.full_path + "\n";
+                to_save += alias.alias + "," + alias.full_path + "," + alias.parameters + "\n";
             }
             try
             {
@@ -156,7 +156,7 @@ namespace FLauncher
 
         private void Install_Plugin_Click(object sender, RoutedEventArgs e)
         {
-            new PluginInstaller().Show();
+            new PluginInstaller().ShowDialog();
         }
     }
 }

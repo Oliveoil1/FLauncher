@@ -14,6 +14,9 @@
                 <StatusBarItem HorizontalAlignment="Right">
                     <StackPanel Orientation="Horizontal">
                         <StatusBarItem>
+                            <Button x:Name="Open_Data" Content="Open Data Folder" Click="Open_Data_Click"/>
+                        </StatusBarItem>
+                        <StatusBarItem>
                             <Button x:Name="Reload_App" Content="Reload Application" Click="Reload_App_Click"/>
                         </StatusBarItem>
                         <StatusBarItem>
@@ -34,10 +37,6 @@
                 <TabItem Header="Aliases">
                     <Grid>
                         <DockPanel>
-                            <ToolBar DockPanel.Dock="Top" HorizontalAlignment="Left" ToolBarTray.IsLocked="True">
-                                <Button x:Name="Open_Data" Content="Open Data Folder" Click="Open_Data_Click"/>
-                            </ToolBar>
-
                             <DataGrid x:Name="AliasGrid"/>
                         </DockPanel>
                     </Grid>

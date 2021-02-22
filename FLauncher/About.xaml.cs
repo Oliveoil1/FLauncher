@@ -25,7 +25,7 @@ namespace FLauncher
         private void Hyperlink_Click(object sender, RoutedEventArgs e)
         {
             var p = new System.Diagnostics.Process();
-            p.StartInfo.FileName = "https://github.com/OliveOil1/FLauncher";
+            p.StartInfo.FileName = (sender as Hyperlink).NavigateUri.ToString();
             p.StartInfo.UseShellExecute = true;
             p.Start();
         }

@@ -93,7 +93,7 @@ namespace FLauncher
 
         private void CreatePluginMetadata_Click(object sender, RoutedEventArgs e)
         {
-            new PluginMetadataCreate().Show();
+            new PluginMetadataCreate().ShowDialog();
         }
     }
 

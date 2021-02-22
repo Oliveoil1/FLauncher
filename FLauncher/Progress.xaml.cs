@@ -15,7 +15,7 @@ namespace FLauncher
     /// <summary>
     /// Interaction logic for Progress.xaml
     /// </summary>
-    public partial class Progress : Window
+    public partial class Progress : AdonisUI.Controls.AdonisWindow
     {
         public Progress(string text, string title)
         {
