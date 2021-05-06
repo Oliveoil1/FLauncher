@@ -1,14 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.IO;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace FLauncher
 {
@@ -28,6 +21,11 @@ namespace FLauncher
             p.StartInfo.FileName = (sender as Hyperlink).NavigateUri.ToString();
             p.StartInfo.UseShellExecute = true;
             p.Start();
+        }
+
+        private void AdonisWindow_Activated(object sender, EventArgs e)
+        {
+            VersionLabel.Content = "Version: " + File.ReadAllText(Directory.GetCurrentDirectory() + @"\version.txt");
         }
     }
 }

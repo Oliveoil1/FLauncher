@@ -1,22 +1,14 @@
-﻿using CsvHelper;
+﻿using AdonisUI.Controls;
+using CsvHelper;
+using PluginBase;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using AdonisUI;
-using AdonisUI.Controls;
 using MessageBox = AdonisUI.Controls.MessageBox;
-using PluginBase;
 
 namespace FLauncher
 {
@@ -50,7 +42,7 @@ namespace FLauncher
                 MessageBoxButtons.Ok(),
                 MessageBoxButtons.Custom("Don't show again", 69 as object)
             },
-            
+
         };
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -92,7 +84,7 @@ namespace FLauncher
 
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
+
         }
 
         private void Autoupdate_Click(object sender, RoutedEventArgs e)
@@ -125,20 +117,20 @@ namespace FLauncher
             {
                 File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/FLauncher" + "/Aliases.csv", to_save);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(this, ex.Message, "Save Failed", AdonisUI.Controls.MessageBoxButton.OK);
             }
             Settings1.Default.Save();
 
-            if(Settings1.Default.PromptApplyChanges == true)
+            if (Settings1.Default.PromptApplyChanges == true)
             {
                 MessageBox.Show(applyChanges);
 
-                if(applyChanges.Result == AdonisUI.Controls.MessageBoxResult.Custom)
+                if (applyChanges.Result == AdonisUI.Controls.MessageBoxResult.Custom)
                 {
-                     Settings1.Default.PromptApplyChanges = false;
-                     Settings1.Default.Save();
+                    Settings1.Default.PromptApplyChanges = false;
+                    Settings1.Default.Save();
                 }
 
             }

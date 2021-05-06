@@ -7,7 +7,7 @@
         xmlns:adonisUi="clr-namespace:AdonisUI;assembly=AdonisUI"
         xmlns:adonisControls="clr-namespace:AdonisUI.Controls;assembly=AdonisUI"
         mc:Ignorable="d"
-        Title="About" Height="300" Width="500" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="About" Height="300" Width="500" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Activated="AdonisWindow_Activated">
     <Grid>
         <TextBlock HorizontalAlignment="Center" Margin="0,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Width="480">
             <Image Source="Resources/FLauncher.ico" Height="25" Width="30"/><Bold FontSize="30">FLauncher</Bold>
@@ -18,7 +18,7 @@
             <LineBreak/>
             <Hyperlink NavigateUri="https://github.com/OliveOil1/FLauncher" Click="Hyperlink_Click">Github Link</Hyperlink>
         </TextBlock>
-
+        <Label x:Name="VersionLabel" VerticalAlignment="Bottom" Margin="10,10,10,10">Version:</Label>
 
     </Grid>
 </adonisControls:AdonisWindow>

@@ -1,19 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
-using System.Text;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace FLauncher
 {
@@ -27,7 +18,7 @@ namespace FLauncher
         {
             InitializeComponent();
 
-            if(updateAvaible)
+            if (updateAvaible)
             {
                 //Cancel.Visibility = Visibility.Visible;
                 Update.Visibility = Visibility.Visible;
@@ -62,7 +53,7 @@ namespace FLauncher
 
                     client.DownloadFileAsync(new Uri("https://github.com/OliveOil1/FLauncher/releases/latest/download/setup.exe"), Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\FLauncher" + @"\update.exe");
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
                 }
@@ -75,17 +66,19 @@ namespace FLauncher
             {
                 Thread.Sleep(1000);
                 progress.Hide();
-                ProcessStartInfo processStartInfo = new ProcessStartInfo();
-                processStartInfo.FileName = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\FLauncher" + @"\update.exe";
-                processStartInfo.Arguments = "/DIR=" + Directory.GetCurrentDirectory();
+                ProcessStartInfo processStartInfo = new ProcessStartInfo
+                {
+                    FileName = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\FLauncher" + @"\update.exe",
+                    Arguments = "/DIR=\"" + Directory.GetCurrentDirectory() + "\""
+                };
 
                 Process.Start(processStartInfo);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-            
+
         }
 
         private void Client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)

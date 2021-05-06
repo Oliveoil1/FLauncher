@@ -1,20 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+﻿using AdonisUI.Controls;
 using Octokit;
+using System;
 using System.IO;
 using System.Net;
-using AdonisUI.Controls;
+using System.Text.Json;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 using MessageBox = AdonisUI.Controls.MessageBox;
 
 namespace FLauncher
@@ -44,7 +36,7 @@ namespace FLauncher
 
             var contents = github.Repository.Content.GetAllContents("Oliveoil1", "Flauncher.Plugins", "metadata").Result;
 
-            foreach(RepositoryContent r in contents)
+            foreach (RepositoryContent r in contents)
             {
                 try
                 {
@@ -58,7 +50,7 @@ namespace FLauncher
 
                     PluginInfoList.Items.Add(pInfoListItem);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, "Error");
                 }

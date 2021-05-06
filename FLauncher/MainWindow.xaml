@@ -20,9 +20,9 @@
 
             <tb:TaskbarIcon.ContextMenu>
                 <ContextMenu>
-                    <!--<MenuItem Header="Open Data Location" Click="MenuItem_Click"/>-->
-                    <!--<MenuItem Header="Reload Application" Click="ReloadPrefs"/>-->
                     <MenuItem Header="Options" Click="OptionsClick"/>
+                    <MenuItem Header="Open Data Location" Click="MenuItem_Click"/>
+                    <MenuItem Header="Reload Application" Click="ReloadPrefs"/>
                     <MenuItem Header="Check For Updates" Click="CheckForUpdatesClick"/>
                     <MenuItem Header="About" Click="ShowAbout"/>
                     <MenuItem Header="Quit" Click="Quit_Click"/>

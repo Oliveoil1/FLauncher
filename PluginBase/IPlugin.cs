@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace PluginBase
+﻿namespace PluginBase
 {
     public interface IPlugin
     {
