@@ -16,8 +16,9 @@
                 </Style>
             </ComboBox.ItemContainerStyle>
         </ComboBox>
-        <TextBox x:Name="ParamsBox" x:FieldModifier="public" Text="--something" KeyDown="Input_KeyDown" FontFamily="Consolas" FontSize="35" FontWeight="Medium"  Cursor="AppStarting" Visibility="Hidden" VerticalAlignment="Bottom">
-
-        </TextBox>
+        <Popup x:Name="ParamsPopup" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <TextBox x:Name="ParamsBox" x:FieldModifier="public" Text="--something" KeyDown="Input_KeyDown" FontFamily="Consolas" FontSize="35" FontWeight="Medium"  Cursor="AppStarting" Visibility="Visible" VerticalAlignment="Bottom">
+            </TextBox>
+        </Popup>
     </Grid>
 </Window>

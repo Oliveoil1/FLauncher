@@ -26,11 +26,39 @@
                 </StatusBarItem>
             </StatusBar>
             <TabControl>
-                <TabItem Header="General">
+                <TabItem Header="Settings">
                     <Grid>
                         <StackPanel>
+                            <Label Content="General"/>
                             <CheckBox x:Name="Autoupdate" Content="Automatically check for updates?" Click="Autoupdate_Click"/>
                             <CheckBox x:Name="IsDark" Content="Dark mode?" Click="IsDark_Click"/>
+                            <Label Content="Alignment"/>
+                            <StackPanel Orientation="Horizontal">
+                                <local:NumericUpDown x:Name="MarginUpDown" HorizontalAlignment="Left" ValueChanged="NumericUpDown_ValueChanged"/>
+                                <Label Content="Distance from edge" VerticalAlignment="Center" FontWeight="Normal"/>
+                            </StackPanel>
+                            <StackPanel x:Name="DisplayModes" Orientation="Horizontal">
+                                <StackPanel x:Name="Left">
+                                    <RadioButton x:Name="TLeft" Content="Top Left" GroupName="DisplayMode" Click="DisplayModeRadio_Click"/>
+                                    <RadioButton x:Name="CLeft" Content="Centre Left" GroupName="DisplayMode" Click="DisplayModeRadio_Click"/>
+                                    <RadioButton x:Name="BLeft" Content="Bottom Left" GroupName="DisplayMode" Click="DisplayModeRadio_Click"/>
+                                </StackPanel>
+                                <StackPanel x:Name="Centre">
+                                    <RadioButton x:Name="TCentre" Content="Top Centre" GroupName="DisplayMode" Click="DisplayModeRadio_Click"/>
+                                    <RadioButton x:Name="CCentre" Content="Centre" GroupName="DisplayMode" Click="DisplayModeRadio_Click"/>
+                                    <RadioButton x:Name="BCentre" Content="Bottom Centre" GroupName="DisplayMode" Click="DisplayModeRadio_Click"/>
+                                </StackPanel>
+                                <StackPanel x:Name="Right">
+                                    <RadioButton x:Name="TRight" Content="Top Right" GroupName="DisplayMode" Click="DisplayModeRadio_Click"/>
+                                    <RadioButton x:Name="CRight" Content="Centre Right" GroupName="DisplayMode" Click="DisplayModeRadio_Click"/>
+                                    <RadioButton x:Name="BRight" Content="Bottom Right " GroupName="DisplayMode" Click="DisplayModeRadio_Click"/>
+                                </StackPanel>
+                            </StackPanel>
+                            <Expander Header="Hidden Options" FontWeight="Bold">
+                                <StackPanel>
+                                    <CheckBox x:Name="AutoReload" Content="Automatically refresh application list (not recommended)" Click="AutoReload_Click" FontWeight="Normal"/>
+                                </StackPanel>
+                            </Expander>
                         </StackPanel>
                     </Grid>
                 </TabItem>

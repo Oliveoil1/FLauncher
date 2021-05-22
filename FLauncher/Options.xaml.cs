@@ -63,6 +63,8 @@ namespace FLauncher
                 var records = csv.GetRecords<Alias>();
 
                 aliases = records.ToList();
+
+                
             }
             catch (Exception ex)
             {
@@ -80,6 +82,11 @@ namespace FLauncher
 
             Autoupdate.IsChecked = Settings1.Default.AutoUpdate;
             IsDark.IsChecked = !Settings1.Default.IsDark;
+            AutoReload.IsChecked = Settings1.Default.AutoReload;
+            MarginUpDown.NUDTextBox.Text = Settings1.Default.DisplayMargin.ToString();
+
+            RadioButton radioButtonSelect = (RadioButton)this.FindName(Settings1.Default.DisplayMode);
+            radioButtonSelect.IsChecked = true;
         }
 
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -149,6 +156,23 @@ namespace FLauncher
         private void Install_Plugin_Click(object sender, RoutedEventArgs e)
         {
             new PluginInstaller().ShowDialog();
+        }
+
+        private void AutoReload_Click(object sender, RoutedEventArgs e)
+        {
+            Settings1.Default.AutoReload = (bool)AutoReload.IsChecked;
+        }
+
+        private void DisplayModeRadio_Click(object sender, RoutedEventArgs e)
+        {
+            Settings1.Default.DisplayMode = (sender as RadioButton).Name;
+        }
+
+        private void NumericUpDown_ValueChanged(object sender, RoutedEventArgs e)
+        {
+            int margin;
+            int.TryParse(MarginUpDown.NUDTextBox.Text, out margin);
+            Settings1.Default.DisplayMargin = margin;
         }
     }
 }

@@ -58,5 +58,41 @@ namespace FLauncher {
                 this["PromptApplyChanges"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool AutoReload {
+            get {
+                return ((bool)(this["AutoReload"]));
+            }
+            set {
+                this["AutoReload"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("CCentre")]
+        public string DisplayMode {
+            get {
+                return ((string)(this["DisplayMode"]));
+            }
+            set {
+                this["DisplayMode"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("20")]
+        public int DisplayMargin {
+            get {
+                return ((int)(this["DisplayMargin"]));
+            }
+            set {
+                this["DisplayMargin"] = value;
+            }
+        }
     }
 }

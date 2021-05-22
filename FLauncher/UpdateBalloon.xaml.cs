@@ -14,6 +14,7 @@ namespace FLauncher
     public partial class UpdateBalloon : UserControl
     {
         Progress progress;
+        const string quote = "\"";
         public UpdateBalloon(bool updateAvaible, string v_tag = "null")
         {
             InitializeComponent();
@@ -51,7 +52,7 @@ namespace FLauncher
                     progress = new Progress("Downloading Update", "Updater");
                     progress.Show();
 
-                    client.DownloadFileAsync(new Uri("https://github.com/OliveOil1/FLauncher/releases/latest/download/setup.exe"), Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\FLauncher" + @"\update.exe");
+                    client.DownloadFileAsync(new Uri("https://github.com/OliveOil1/FLauncher/releases/latest/download/setup.exe"), quote + Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\FLauncher" + @"\update.exe" + quote);
                 }
                 catch (Exception ex)
                 {

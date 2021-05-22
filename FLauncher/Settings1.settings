@@ -11,5 +11,14 @@
     <Setting Name="PromptApplyChanges" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
+    <Setting Name="AutoReload" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="DisplayMode" Type="System.String" Scope="User">
+      <Value Profile="(Default)">CCentre</Value>
+    </Setting>
+    <Setting Name="DisplayMargin" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">20</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

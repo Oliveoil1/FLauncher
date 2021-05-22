@@ -11,6 +11,7 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Threading;
 using MessageBox = AdonisUI.Controls.MessageBox;
 using MessageBoxButton = AdonisUI.Controls.MessageBoxButton;
 using MessageBoxImage = AdonisUI.Controls.MessageBoxImage;
@@ -26,6 +27,22 @@ namespace FLauncher
         public static List<Alias> aliases;
         public static List<IPlugin> plugins = new List<IPlugin>();
 
+        enum DisplayMode
+        {
+            TopLeft,
+            TopCenter,
+            TopRight,
+            CenterLeft,
+            Center,
+            CenterRight,
+            BottomLeft,
+            BottomCenter,
+            BottomRight
+        }
+
+        DisplayMode displayMode = DisplayMode.CenterRight;
+        int displayMargin = 10;
+
         public Runbox()
         {
             InitializeComponent();
@@ -38,18 +55,28 @@ namespace FLauncher
         {
             if (e.Key == Key.Tab)
             {
-                if (ParamsBox.Visibility == Visibility.Hidden)
+                ParamsPopup.IsOpen = !ParamsPopup.IsOpen;
+                ParamsPopup.Width = Width;
+                ParamsBox.Text = "";
+
+                if (ParamsPopup.IsOpen == true)
                 {
-                    Height = 119;
-                    ParamsBox.Visibility = Visibility.Visible;
-                    ParamsBox.Text = "";
+                    Dispatcher.BeginInvoke(DispatcherPriority.Input,
+                    new Action(delegate ()
+                    {
+                        ParamsBox.Focus();         // Set Logical Focus
+                        Keyboard.Focus(ParamsBox); // Set Keyboard Focus
+                    }));
                 }
                 else
                 {
-                    Height = 70;
-                    ParamsBox.Visibility = Visibility.Hidden;
+                    Dispatcher.BeginInvoke(DispatcherPriority.Input,
+                    new Action(delegate ()
+                    {
+                        Input.Focus();         // Set Logical Focus
+                        Keyboard.Focus(Input); // Set Keyboard Focus
+                    }));
                 }
-
             }
             if (e.Key == Key.Enter)
             {
@@ -67,7 +94,7 @@ namespace FLauncher
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show(ex.Message, "Error");
+                        MessageBox.Show(ex.Message, "Error");   
                     }
                 }
 
@@ -114,9 +141,7 @@ namespace FLauncher
                 {
                     process.Start();
 
-                    Height = 70;
-                    ParamsBox.Visibility = Visibility.Hidden;
-
+                    ParamsPopup.IsOpen = false;
                     ParamsBox.Text = "";
                 }
                 catch (Exception ex)
@@ -128,6 +153,11 @@ namespace FLauncher
                     Input.Focus();
                 }
 
+            }
+            if(e.Key == Key.F5)
+            {
+                Reload();
+                MessageBox.Show("Refreshed Application List", "Refreshed", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
@@ -169,19 +199,63 @@ namespace FLauncher
         private void Window_Deactivated(object sender, EventArgs e)
         {
             Visibility = Visibility.Hidden;
+            ParamsPopup.IsOpen = false;
         }
 
         private void Window_Activated(object sender, EventArgs e)
         {
+            displayMargin = Settings1.Default.DisplayMargin;
             Input.Text = "";
             Input.Focus();
 
-            Height = 70;
-            ParamsBox.Visibility = Visibility.Hidden;
-
+            ParamsPopup.IsOpen = false;
             ParamsBox.Text = "";
 
-            Reload();
+            switch (Settings1.Default.DisplayMode)
+            {
+                case "TLeft":
+                    this.Left = displayMargin;
+                    this.Top = displayMargin;
+                    break;
+                case "TCentre":
+                    this.Left = (SystemParameters.WorkArea.Width / 2) - this.Width / 2;
+                    this.Top = displayMargin;
+                    break;
+                case "TRight":
+                    this.Left = (SystemParameters.WorkArea.Width) - this.Width - displayMargin;
+                    this.Top = displayMargin;
+                    break;
+                case "CLeft":
+                    this.Left = displayMargin;
+                    this.Top = (SystemParameters.WorkArea.Height / 2) - this.Height / 2;
+                    break;
+                case "CCentre":
+                    this.Left = (SystemParameters.WorkArea.Width / 2) - this.Width / 2;
+                    this.Top = (SystemParameters.WorkArea.Height / 2) - this.Height / 2;
+                    break;
+                case "CRight":
+                    this.Left = (SystemParameters.WorkArea.Width) - this.Width - displayMargin;
+                    this.Top = (SystemParameters.WorkArea.Height / 2) - this.Height / 2;
+                    break;
+                case "BLeft":
+                    this.Left = displayMargin;
+                    this.Top = SystemParameters.WorkArea.Height - this.Height - displayMargin;
+                    break;
+                case "BCentre":
+                    this.Left = (SystemParameters.WorkArea.Width / 2) - this.Width / 2;
+                    this.Top = SystemParameters.WorkArea.Height - this.Height - displayMargin;
+                    break;
+                case "BRight":
+                    this.Left = (SystemParameters.WorkArea.Width) - this.Width - displayMargin;
+                    this.Top = SystemParameters.WorkArea.Height - this.Height - displayMargin;
+                    break;
+
+            }
+
+            if (Settings1.Default.AutoReload == true)
+            {
+                Reload();
+            }
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
