@@ -20,12 +20,36 @@
 
             <tb:TaskbarIcon.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="Options" Click="OptionsClick"/>
-                    <MenuItem Header="Open Data Location" Click="MenuItem_Click"/>
-                    <MenuItem Header="Restart Application" Click="ReloadPrefs"/>
-                    <MenuItem Header="Check For Updates" Click="CheckForUpdatesClick"/>
-                    <MenuItem Header="About" Click="ShowAbout"/>
-                    <MenuItem Header="Quit" Click="Quit_Click"/>
+					<MenuItem Header="Options" Click="OptionsClick">
+						<MenuItem.Icon>
+							<Image Source="/cog.png" Width="16" Height="16"/>
+						</MenuItem.Icon>
+					</MenuItem>
+					<MenuItem Header="Open Data Location" Click="MenuItem_Click">
+						<MenuItem.Icon>
+							<Image Source="/folder_explore.png" Width="16" Height="16"/>
+						</MenuItem.Icon>
+					</MenuItem>
+					<MenuItem Header="Restart Application" Click="ReloadPrefs">
+						<MenuItem.Icon>
+							<Image Source="/arrow_refresh_small.png" Width="16" Height="16"/>
+						</MenuItem.Icon>
+					</MenuItem>
+					<MenuItem Header="Check For Updates" Click="CheckForUpdatesClick">
+						<MenuItem.Icon>
+							<Image Source="/world.png" Width="16" Height="16"/>
+						</MenuItem.Icon>
+					</MenuItem>
+					<MenuItem Header="About" Click="ShowAbout">
+						<MenuItem.Icon>
+							<Image Source="/flauncher.png" Width="16" Height="16"/>
+						</MenuItem.Icon>
+					</MenuItem>
+					<MenuItem Header="Quit" Click="Quit_Click">
+						<MenuItem.Icon>
+							<Image Source="/cross.png" Width="16" Height="16"/>
+						</MenuItem.Icon>
+					</MenuItem>
                 </ContextMenu>
             </tb:TaskbarIcon.ContextMenu>
         </tb:TaskbarIcon>

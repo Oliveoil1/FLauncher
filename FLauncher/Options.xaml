@@ -26,8 +26,14 @@
                 </StatusBarItem>
             </StatusBar>
             <TabControl>
-                <TabItem Header="Settings">
-                    <Grid>
+				<TabItem>
+					<TabItem.Header>
+						<StackPanel Orientation="Horizontal">
+							<Image Source="/cog.png" Width="16" Height="16"/>
+							<TextBlock Text=" Settings"/>
+						</StackPanel>
+					</TabItem.Header>
+					<Grid>
                         <StackPanel>
                             <Label Content="General"/>
                             <CheckBox x:Name="Autoupdate" Content="Automatically check for updates?" Click="Autoupdate_Click"/>
@@ -62,21 +68,37 @@
                         </StackPanel>
                     </Grid>
                 </TabItem>
-                <TabItem Header="Aliases">
-                    <Grid>
+                <TabItem>
+					<TabItem.Header>
+						<StackPanel Orientation="Horizontal">
+							<Image Source="/database.png" Width="16" Height="16"/>
+							<TextBlock Text=" Aliases"/>
+						</StackPanel>
+					</TabItem.Header>
+					<Grid>
                         <DockPanel>
+							<ToolBar DockPanel.Dock="Top" ToolBarTray.IsLocked="True">
+								<Button x:Name="Create_Alias" Content="Create Alias" Click="Create_Alias_Click"/>
+							</ToolBar>
                             <DataGrid x:Name="AliasGrid"/>
                         </DockPanel>
                     </Grid>
                 </TabItem>
-                <TabItem Header="Plugins">
-                    <Grid>
+                <TabItem>
+					<TabItem.Header>
+						<StackPanel Orientation="Horizontal">
+							<Image Source="/plugin.png" Width="16" Height="16"/>
+							<TextBlock Text=" Plugins"/>
+						</StackPanel>
+					</TabItem.Header>
+					<Grid>
                         <DockPanel>
                             <ToolBar DockPanel.Dock="Top" HorizontalAlignment="Left" ToolBarTray.IsLocked="True">
-                                <Button x:Name="Install_Plugin" Content="Install Plugin" Click="Install_Plugin_Click"/>
-                            </ToolBar>
+                                <Button x:Name="Download_Plugin" Content="Download" Click="Download_Plugin_Click"/>
+								<Button x:Name="Install_Plugin" Content="Install From File" Click="Install_Plugin_Click"/>
+							</ToolBar>
 
-                            <ListBox x:Name="PluginList"/>
+                            <ListBox x:Name="PluginList" SelectionChanged="PluginList_SelectionChanged"/>
                         </DockPanel>
                     </Grid>
                 </TabItem>

@@ -10,8 +10,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="arrow_refresh_small.png" />
+    <None Remove="cog.png" />
+    <None Remove="cross.png" />
+    <None Remove="database.png" />
+    <None Remove="database_refresh.png" />
+    <None Remove="flauncher.png" />
+    <None Remove="folder_explore.png" />
+    <None Remove="folder_page_white.png" />
+    <None Remove="plugin.png" />
     <None Remove="Resources\FLauncher.ico" />
     <None Remove="Resources\FLauncherDebug.png" />
+    <None Remove="world.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,6 +31,7 @@
   <ItemGroup>
     <PackageReference Include="AdonisUI.ClassicTheme" Version="1.17.0" />
     <PackageReference Include="CsvHelper" Version="15.0.10" />
+    <PackageReference Include="DotNetProjects.SVGImage" Version="4.1.94" />
     <PackageReference Include="GlobalHotKey" Version="1.1.0" />
     <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.0.8" />
     <PackageReference Include="Microsoft-WindowsAPICodePack-Shell" Version="1.1.4" />
@@ -42,9 +53,19 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="arrow_refresh_small.png" />
+    <Resource Include="cog.png" />
+    <Resource Include="cross.png" />
+    <Resource Include="database.png" />
+    <Resource Include="database_refresh.png" />
+    <Resource Include="flauncher.png" />
+    <Resource Include="folder_explore.png" />
+    <Resource Include="folder_page_white.png" />
+    <Resource Include="plugin.png" />
     <Resource Include="Resources\FLauncher.ico">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="world.png" />
   </ItemGroup>
 
   <ItemGroup>

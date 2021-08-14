@@ -5,20 +5,36 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FLauncher"
         mc:Ignorable="d"
-        Title="FLauncher" Height="70" Width="650" Deactivated="Window_Deactivated" Activated="Window_Activated" WindowStyle="None" ResizeMode="NoResize" Closing="Window_Closing" WindowStartupLocation="CenterScreen" Foreground="Black" Loaded="Window_Loaded" Background="{x:Null}" KeyDown="Window_KeyDown" ShowInTaskbar="False">
+        Title="FLauncher" Height="90" Width="650" Deactivated="Window_Deactivated" Activated="Window_Activated" WindowStyle="None" ResizeMode="NoResize" Closing="Window_Closing" WindowStartupLocation="CenterScreen" Foreground="Black" Loaded="Window_Loaded" KeyDown="Window_KeyDown" ShowInTaskbar="False">
 
-    <Grid>
-        <ComboBox x:Name="Input" x:FieldModifier="public" Text="cmd" KeyDown="Input_KeyDown" FontFamily="Consolas" FontSize="55" IsEditable="True" FontWeight="Bold" Cursor="AppStarting" Height="70" Width="650" VerticalAlignment="Top">
-            <ComboBox.ItemContainerStyle>
-                <Style TargetType="ComboBoxItem">
-                    <Setter Property="MaxWidth" Value="640"/>
-                    <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Visible"/>
-                </Style>
-            </ComboBox.ItemContainerStyle>
-        </ComboBox>
-        <Popup x:Name="ParamsPopup" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-            <TextBox x:Name="ParamsBox" x:FieldModifier="public" Text="--something" KeyDown="Input_KeyDown" FontFamily="Consolas" FontSize="35" FontWeight="Medium"  Cursor="AppStarting" Visibility="Visible" VerticalAlignment="Bottom">
-            </TextBox>
-        </Popup>
-    </Grid>
+	<Grid>
+		<ComboBox x:Name="Input" x:FieldModifier="public" Text="cmd" KeyDown="Input_KeyDown" FontFamily="Consolas" FontSize="55" IsEditable="True" FontWeight="Bold" Cursor="AppStarting" Width="650" VerticalAlignment="Top" Height="70">
+			<ComboBox.ItemContainerStyle>
+				<Style TargetType="ComboBoxItem">
+					<Setter Property="MaxWidth" Value="640"/>
+					<Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Visible"/>
+				</Style>
+			</ComboBox.ItemContainerStyle>
+		</ComboBox>
+		<StatusBar VerticalAlignment="Bottom" Margin="0,0,0,0" Height="20">
+			<StatusBarItem>
+				<TextBlock x:Name="Watermark" Text="FLauncher - v1.0.0" Cursor="Hand" MouseLeftButtonUp="Watermark_MouseUp"/>
+			</StatusBarItem>
+			<StatusBarItem HorizontalAlignment="Right" Padding="0">
+				<StackPanel Orientation="Horizontal">
+					<Button x:Name="RefreshAliases" Padding="0,0" Width="20" Height="20" ToolTip="Refresh Aliases" Click="RefreshAliases_Click">
+						<Image Source="/database_refresh.png" Width="16" Height="16"/>
+					</Button>
+					<Button x:Name="ShowSettings" Padding="0,0" Width="20" Height="20" ToolTip="Settings" Click="ShowSettings_Click">
+						<Image Source="/cog.png" Width="16" Height="16"/>
+					</Button>
+				</StackPanel>
+			</StatusBarItem>
+		</StatusBar>
+
+		<Popup x:Name="ParamsPopup" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+			<TextBox x:Name="ParamsBox" x:FieldModifier="public" Text="--something" KeyDown="Input_KeyDown" FontFamily="Consolas" FontSize="35" FontWeight="Medium"  Cursor="AppStarting" Visibility="Visible" VerticalAlignment="Bottom">
+			</TextBox>
+		</Popup>
+	</Grid>
 </Window>

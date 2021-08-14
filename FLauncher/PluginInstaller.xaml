@@ -13,7 +13,7 @@
             <ToolBar DockPanel.Dock="Top">
                 <Button x:Name="Install" Content="Install Selected" Visibility="Collapsed"/>
                 <Button x:Name="InstallFromFile" Content="Install From File" Visibility="Collapsed"/>
-                <Button x:Name="CreatePluginMetadata" Content="Create Plugin Metadata" Click="CreatePluginMetadata_Click"/>
+                <Button x:Name="CreatePluginMetadata" Content="Create Plugin Metadata (For Devs)" Click="CreatePluginMetadata_Click"/>
             </ToolBar>
             <ListBox x:Name="PluginInfoList">
 
